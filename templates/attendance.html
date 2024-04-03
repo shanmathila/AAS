@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CSV Table</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/467869ca8c.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div>
+    <div class="heading">
+        <h1>Attendance Table</h1>
+    </div>
+    <div class="container" >
+    <table >
+        <thead>
+            <tr>
+              <th style="position: sticky; top: 0;">Name</td>
+              <th style="position: sticky; top: 0;">Date</td>
+              <th style="position: sticky; top: 0;">In Time</td>
+              <th style="position: sticky; top: 0;">Out Time</td>
+            </tr>
+          </thead>
+        <tbody>
+            {% for name, values in data.items() %}
+                {% for entry in values %}
+                    <tr>
+                        <td>{{ name }}</td>
+                        <td>{{ entry["Date"] }}</td>
+                        <td>{{ entry["In Time"] }}</td>
+                        <td>{{ entry["Out Time"] }}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+        
+    </table>
+</div>
+<div >
+    <a href="/download"><button class="dbtn" style="width: 20%"><i class="fa fa-download"></i> Download CSV</button></a>
+</div>
+
+<div>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <div class="file">
+            <label for="images" class="drop-container">
+                <input type="file" id="upload" name="file" accept=".jpg" required/>
+                <input class="ubtn" type="submit" value="Upload JPG File">
+            </label>
+        </div>
+    </form>
+    
+</div>
+
+</body>
+</html>
